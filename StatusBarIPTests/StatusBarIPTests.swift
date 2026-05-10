@@ -32,6 +32,21 @@ final class StatusBarIPTests: XCTestCase {
         XCTAssertEqual(AdapterClassifier.classify(interfaceName: "bridge0", address: "203.0.113.4"), .other)
     }
 
+    func testStatusBarAddressFormatterCanAbbreviateIPAddresses() {
+        XCTAssertEqual(
+            IPAddressDisplayFormatter.statusBarAddress("111.123.321.22", abbreviated: true),
+            "111...22"
+        )
+        XCTAssertEqual(
+            IPAddressDisplayFormatter.statusBarAddress("fe80::10a9:6e2:1256:3dd3", abbreviated: true),
+            "fe8...dd3"
+        )
+        XCTAssertEqual(
+            IPAddressDisplayFormatter.statusBarAddress("118.71.15.68", abbreviated: false),
+            "118.71.15.68"
+        )
+    }
+
     @MainActor
     func testVisibilityFallbackUsesNextOrderedEntry() {
         let settings = AppSettings(
@@ -39,7 +54,8 @@ final class StatusBarIPTests: XCTestCase {
             orderedIDs: ["lan-en0", AdapterKind.publicIP.rawValue],
             hiddenIDs: ["lan-en0"],
             showDockIcon: false,
-            showStatusBarIcon: true
+            showStatusBarIcon: true,
+            abbreviateStatusBarIP: false
         )
         let store = IPStore(
             publicFetcher: MockPublicFetcher(response: PublicIPResponse(ip: "118.71.15.68", realIP: nil, country: nil, countryName: nil, asn: nil, asOrganization: nil, city: nil, timezone: nil)),

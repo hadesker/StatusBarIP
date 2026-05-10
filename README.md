@@ -2,6 +2,24 @@
 
 Status Bar IP is a small macOS menu bar utility that displays the current public IP address and local adapter addresses. It is built with SwiftUI for the UI layer and AppKit for precise menu bar behavior.
 
+## Screenshots
+
+### Popover
+
+![Status Bar IP popover](assets/screenshot_popover.png)
+
+### Settings: General
+
+![Status Bar IP general settings](assets/screenshot_general.png)
+
+### Settings: Adapter Display
+
+![Status Bar IP adapter display settings](assets/screenshot_adapter.png)
+
+### Settings: About
+
+![Status Bar IP about settings](assets/screenshot_about.png)
+
 ## Features
 
 - Shows the selected IP address in the macOS status bar.

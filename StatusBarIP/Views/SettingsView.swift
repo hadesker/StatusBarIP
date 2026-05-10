@@ -14,7 +14,7 @@ struct SettingsView: View {
             detail
         }
         .frame(width: 820, height: 500)
-        .background(.regularMaterial)
+        .background(SettingsPalette.windowBackground)
         .onAppear {
             store.refreshLaunchAtLoginStatus()
         }
@@ -28,21 +28,23 @@ struct SettingsView: View {
                 } label: {
                     HStack(spacing: 10) {
                         Image(systemName: item.symbolName)
-                            .font(.system(size: 14, weight: .semibold))
+                            .font(.system(size: 14, weight: .regular))
                             .frame(width: 19)
 
                         Text(item.title)
-                            .font(.system(size: 14, weight: .semibold))
+                            .font(.system(size: 14, weight: .regular))
 
                         Spacer()
                     }
-                    .padding(.horizontal, 9)
-                    .padding(.vertical, 7)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 8)
                     .contentShape(Rectangle())
                     .foregroundStyle(selection == item ? .white : .primary)
                     .background {
-                        RoundedRectangle(cornerRadius: 7, style: .continuous)
-                            .fill(selection == item ? Color.blue : Color.clear)
+                        if selection == item {
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .fill(SettingsPalette.selectedMenuBackground)
+                        }
                     }
                 }
                 .buttonStyle(.plain)
@@ -52,7 +54,6 @@ struct SettingsView: View {
         }
         .padding(10)
         .frame(width: 200)
-        .background(Color.primary.opacity(0.025))
     }
 
     @ViewBuilder
@@ -92,6 +93,11 @@ private enum SettingsMenuItem: String, CaseIterable, Identifiable {
     }
 }
 
+private enum SettingsPalette {
+    static let windowBackground = Color(red: 0.095, green: 0.082, blue: 0.115)
+    static let selectedMenuBackground = Color(red: 0.015, green: 0.315, blue: 0.78)
+}
+
 private struct GeneralSettingsPane: View {
     @ObservedObject var store: IPStore
 
@@ -123,6 +129,13 @@ private struct GeneralSettingsPane: View {
                         subtitle: "Show the globe-style adapter icon before the IP address.",
                         systemImage: "globe.asia.australia.fill",
                         isOn: statusIconBinding
+                    )
+
+                    SettingsToggleRow(
+                        title: "Shorten status bar IP",
+                        subtitle: "Show only the beginning and end of the main menu bar address.",
+                        systemImage: "textformat.abc.dottedunderline",
+                        isOn: abbreviatedStatusBarIPBinding
                     )
 
                     SettingsToggleRow(
@@ -176,6 +189,13 @@ private struct GeneralSettingsPane: View {
         Binding(
             get: { store.settings.showStatusBarIcon },
             set: { store.settings.showStatusBarIcon = $0 }
+        )
+    }
+
+    private var abbreviatedStatusBarIPBinding: Binding<Bool> {
+        Binding(
+            get: { store.settings.abbreviateStatusBarIP },
+            set: { store.settings.abbreviateStatusBarIP = $0 }
         )
     }
 

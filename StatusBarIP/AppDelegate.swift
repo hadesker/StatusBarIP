@@ -58,27 +58,39 @@ final class StatusItemController: NSObject {
             rootView: PopoverView(store: store) { [weak self] in
                 self?.popover.performClose(nil)
                 self?.openSettings()
+            } quitApp: {
+                NSApp.terminate(nil)
             }
         )
     }
 
     private func configureMenu() {
         rightClickMenu.addItem(
-            NSMenuItem(
+            menuItem(
                 title: "Settings",
+                systemImage: "gearshape",
                 action: #selector(openSettingsFromMenu),
-                keyEquivalent: ","
+                keyEquivalent: ""
             )
         )
         rightClickMenu.addItem(.separator())
         rightClickMenu.addItem(
-            NSMenuItem(
-                title: "Close",
+            menuItem(
+                title: "Quit",
+                systemImage: "power",
                 action: #selector(closeApp),
                 keyEquivalent: "q"
             )
         )
         rightClickMenu.items.forEach { $0.target = self }
+    }
+
+    private func menuItem(title: String, systemImage: String, action: Selector, keyEquivalent: String) -> NSMenuItem {
+        let item = NSMenuItem(title: title, action: action, keyEquivalent: keyEquivalent)
+        let image = NSImage(systemSymbolName: systemImage, accessibilityDescription: title)
+        image?.isTemplate = true
+        item.image = image
+        return item
     }
 
     private func observeStore() {
@@ -102,7 +114,13 @@ final class StatusItemController: NSObject {
         image?.isTemplate = true
 
         button.image = image
-        button.title = entry.map { store.settings.showStatusBarIcon ? " \($0.address)" : $0.address } ?? "No IP"
+        button.title = entry.map { entry in
+            let address = IPAddressDisplayFormatter.statusBarAddress(
+                entry.address,
+                abbreviated: store.settings.abbreviateStatusBarIP
+            )
+            return store.settings.showStatusBarIcon ? " \(address)" : address
+        } ?? "No IP"
         button.toolTip = entry.map { "\($0.displayTitle): \($0.address)" } ?? "Status Bar IP"
     }
 

@@ -9,13 +9,15 @@ struct AppSettings: Equatable, Sendable {
     var hiddenIDs: Set<String>
     var showDockIcon: Bool
     var showStatusBarIcon: Bool
+    var abbreviateStatusBarIP: Bool
 
     static let defaults = AppSettings(
         fetchInterval: defaultFetchInterval,
         orderedIDs: AdapterKind.defaultOrder.map(\.rawValue),
         hiddenIDs: [],
         showDockIcon: false,
-        showStatusBarIcon: true
+        showStatusBarIcon: true,
+        abbreviateStatusBarIP: false
     )
 }
 
@@ -31,6 +33,7 @@ struct UserDefaultsSettingsStore: SettingsStoring {
         static let hiddenIDs = "hiddenIDs"
         static let showDockIcon = "showDockIcon"
         static let showStatusBarIcon = "showStatusBarIcon"
+        static let abbreviateStatusBarIP = "abbreviateStatusBarIP"
     }
 
     private let defaults: UserDefaults
@@ -45,13 +48,15 @@ struct UserDefaultsSettingsStore: SettingsStoring {
         let hiddenIDs = Set(defaults.stringArray(forKey: Key.hiddenIDs) ?? [])
         let showDockIcon = defaults.object(forKey: Key.showDockIcon) as? Bool ?? AppSettings.defaults.showDockIcon
         let showStatusBarIcon = defaults.object(forKey: Key.showStatusBarIcon) as? Bool ?? AppSettings.defaults.showStatusBarIcon
+        let abbreviateStatusBarIP = defaults.object(forKey: Key.abbreviateStatusBarIP) as? Bool ?? AppSettings.defaults.abbreviateStatusBarIP
 
         return AppSettings(
             fetchInterval: max(rawInterval, AppSettings.minimumFetchInterval),
             orderedIDs: orderedIDs,
             hiddenIDs: hiddenIDs,
             showDockIcon: showDockIcon,
-            showStatusBarIcon: showStatusBarIcon
+            showStatusBarIcon: showStatusBarIcon,
+            abbreviateStatusBarIP: abbreviateStatusBarIP
         )
     }
 
@@ -61,5 +66,6 @@ struct UserDefaultsSettingsStore: SettingsStoring {
         defaults.set(Array(settings.hiddenIDs), forKey: Key.hiddenIDs)
         defaults.set(settings.showDockIcon, forKey: Key.showDockIcon)
         defaults.set(settings.showStatusBarIcon, forKey: Key.showStatusBarIcon)
+        defaults.set(settings.abbreviateStatusBarIP, forKey: Key.abbreviateStatusBarIP)
     }
 }

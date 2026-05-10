@@ -43,6 +43,7 @@
 		100000000000000000000210 /* StatusBarIPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarIPTests.swift; sourceTree = "<group>"; };
 		100000000000000000000211 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		100000000000000000000212 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		100000000000000000000213 /* StatusBarIP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StatusBarIP.entitlements; sourceTree = "<group>"; };
 		100000000000000000000501 /* Status Bar IP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Status Bar IP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		100000000000000000000502 /* StatusBarIPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatusBarIPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -87,6 +88,7 @@
 				100000000000000000000208 /* Views/PopoverView.swift */,
 				100000000000000000000209 /* Views/SettingsView.swift */,
 				100000000000000000000211 /* Info.plist */,
+				100000000000000000000213 /* StatusBarIP.entitlements */,
 				100000000000000000000212 /* Assets.xcassets */,
 			);
 			path = StatusBarIP;
@@ -159,6 +161,11 @@
 				TargetAttributes = {
 					100000000000000000000401 = {
 						CreatedOnToolsVersion = 26.2;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					100000000000000000000402 = {
 						CreatedOnToolsVersion = 26.2;
@@ -354,25 +361,26 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_ENTITLEMENTS = StatusBarIP/StatusBarIP.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 4Y76Q8W243;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = StatusBarIP/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Status Bar IP";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = net.hadesker.statusbarip;
 				PRODUCT_MODULE_NAME = StatusBarIP;
 				PRODUCT_NAME = "Status Bar IP";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 			};
@@ -382,25 +390,26 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_ENTITLEMENTS = StatusBarIP/StatusBarIP.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 4Y76Q8W243;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = StatusBarIP/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Status Bar IP";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = net.hadesker.statusbarip;
 				PRODUCT_MODULE_NAME = StatusBarIP;
 				PRODUCT_NAME = "Status Bar IP";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 			};

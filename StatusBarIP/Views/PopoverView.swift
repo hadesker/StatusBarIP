@@ -4,6 +4,7 @@ import AppKit
 struct PopoverView: View {
     @ObservedObject var store: IPStore
     let openSettings: () -> Void
+    let quitApp: () -> Void
 
     private let maxListHeight: CGFloat = 300
 
@@ -90,6 +91,10 @@ struct PopoverView: View {
                 .lineLimit(1)
 
             Spacer()
+
+            PopoverIconButton(systemName: "power", help: "Quit", size: 22, iconSize: 12) {
+                quitApp()
+            }
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
@@ -113,6 +118,8 @@ struct PopoverView: View {
 private struct PopoverIconButton: View {
     let systemName: String
     let help: String
+    var size: CGFloat = 28
+    var iconSize: CGFloat = 15
     let action: () -> Void
 
     @State private var isHovering = false
@@ -120,9 +127,9 @@ private struct PopoverIconButton: View {
     var body: some View {
         Button(action: action) {
             Image(systemName: systemName)
-                .font(.system(size: 15, weight: .semibold))
+                .font(.system(size: iconSize, weight: .semibold))
                 .foregroundStyle(isHovering ? .primary : .secondary)
-                .frame(width: 28, height: 28)
+                .frame(width: size, height: size)
                 .background {
                     RoundedRectangle(cornerRadius: 7, style: .continuous)
                         .fill(isHovering ? Color.primary.opacity(0.11) : Color.clear)
