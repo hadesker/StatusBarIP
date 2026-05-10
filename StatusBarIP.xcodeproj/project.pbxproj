@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		100000000000000000000101 /* StatusBarIPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000201 /* StatusBarIPApp.swift */; };
 		100000000000000000000102 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000202 /* AppDelegate.swift */; };
-		100000000000000000000103 /* IPModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000203 /* IPModels.swift */; };
-		100000000000000000000104 /* PublicIPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000204 /* PublicIPService.swift */; };
-		100000000000000000000105 /* LocalIPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000205 /* LocalIPService.swift */; };
-		100000000000000000000106 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000206 /* AppSettings.swift */; };
-		100000000000000000000107 /* IPStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000207 /* IPStore.swift */; };
-		100000000000000000000108 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000208 /* PopoverView.swift */; };
-		100000000000000000000109 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000209 /* SettingsView.swift */; };
+		100000000000000000000103 /* Models/IPModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000203 /* Models/IPModels.swift */; };
+		100000000000000000000104 /* Services/PublicIPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000204 /* Services/PublicIPService.swift */; };
+		100000000000000000000105 /* Services/LocalIPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000205 /* Services/LocalIPService.swift */; };
+		100000000000000000000106 /* Services/AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000206 /* Services/AppSettings.swift */; };
+		100000000000000000000107 /* Services/IPStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000207 /* Services/IPStore.swift */; };
+		100000000000000000000108 /* Views/PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000208 /* Views/PopoverView.swift */; };
+		100000000000000000000109 /* Views/SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000209 /* Views/SettingsView.swift */; };
 		100000000000000000000110 /* StatusBarIPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000210 /* StatusBarIPTests.swift */; };
 		100000000000000000000111 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000212 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -33,13 +33,13 @@
 /* Begin PBXFileReference section */
 		100000000000000000000201 /* StatusBarIPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarIPApp.swift; sourceTree = "<group>"; };
 		100000000000000000000202 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		100000000000000000000203 /* IPModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/IPModels.swift; sourceTree = "<group>"; };
-		100000000000000000000204 /* PublicIPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/PublicIPService.swift; sourceTree = "<group>"; };
-		100000000000000000000205 /* LocalIPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/LocalIPService.swift; sourceTree = "<group>"; };
-		100000000000000000000206 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/AppSettings.swift; sourceTree = "<group>"; };
-		100000000000000000000207 /* IPStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/IPStore.swift; sourceTree = "<group>"; };
-		100000000000000000000208 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/PopoverView.swift; sourceTree = "<group>"; };
-		100000000000000000000209 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/SettingsView.swift; sourceTree = "<group>"; };
+		100000000000000000000203 /* Models/IPModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/IPModels.swift; sourceTree = "<group>"; };
+		100000000000000000000204 /* Services/PublicIPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/PublicIPService.swift; sourceTree = "<group>"; };
+		100000000000000000000205 /* Services/LocalIPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/LocalIPService.swift; sourceTree = "<group>"; };
+		100000000000000000000206 /* Services/AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/AppSettings.swift; sourceTree = "<group>"; };
+		100000000000000000000207 /* Services/IPStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/IPStore.swift; sourceTree = "<group>"; };
+		100000000000000000000208 /* Views/PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/PopoverView.swift; sourceTree = "<group>"; };
+		100000000000000000000209 /* Views/SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/SettingsView.swift; sourceTree = "<group>"; };
 		100000000000000000000210 /* StatusBarIPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarIPTests.swift; sourceTree = "<group>"; };
 		100000000000000000000211 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		100000000000000000000212 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,13 +79,13 @@
 			children = (
 				100000000000000000000201 /* StatusBarIPApp.swift */,
 				100000000000000000000202 /* AppDelegate.swift */,
-				100000000000000000000203 /* IPModels.swift */,
-				100000000000000000000204 /* PublicIPService.swift */,
-				100000000000000000000205 /* LocalIPService.swift */,
-				100000000000000000000206 /* AppSettings.swift */,
-				100000000000000000000207 /* IPStore.swift */,
-				100000000000000000000208 /* PopoverView.swift */,
-				100000000000000000000209 /* SettingsView.swift */,
+				100000000000000000000203 /* Models/IPModels.swift */,
+				100000000000000000000204 /* Services/PublicIPService.swift */,
+				100000000000000000000205 /* Services/LocalIPService.swift */,
+				100000000000000000000206 /* Services/AppSettings.swift */,
+				100000000000000000000207 /* Services/IPStore.swift */,
+				100000000000000000000208 /* Views/PopoverView.swift */,
+				100000000000000000000209 /* Views/SettingsView.swift */,
 				100000000000000000000211 /* Info.plist */,
 				100000000000000000000212 /* Assets.xcassets */,
 			);
@@ -210,13 +210,13 @@
 			files = (
 				100000000000000000000101 /* StatusBarIPApp.swift in Sources */,
 				100000000000000000000102 /* AppDelegate.swift in Sources */,
-				100000000000000000000103 /* IPModels.swift in Sources */,
-				100000000000000000000104 /* PublicIPService.swift in Sources */,
-				100000000000000000000105 /* LocalIPService.swift in Sources */,
-				100000000000000000000106 /* AppSettings.swift in Sources */,
-				100000000000000000000107 /* IPStore.swift in Sources */,
-				100000000000000000000108 /* PopoverView.swift in Sources */,
-				100000000000000000000109 /* SettingsView.swift in Sources */,
+				100000000000000000000103 /* Models/IPModels.swift in Sources */,
+				100000000000000000000104 /* Services/PublicIPService.swift in Sources */,
+				100000000000000000000105 /* Services/LocalIPService.swift in Sources */,
+				100000000000000000000106 /* Services/AppSettings.swift in Sources */,
+				100000000000000000000107 /* Services/IPStore.swift in Sources */,
+				100000000000000000000108 /* Views/PopoverView.swift in Sources */,
+				100000000000000000000109 /* Views/SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,8 +355,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 4Y76Q8W243;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = StatusBarIP/Info.plist;
@@ -369,6 +372,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.hadesker.statusbarip;
 				PRODUCT_MODULE_NAME = StatusBarIP;
 				PRODUCT_NAME = "Status Bar IP";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 			};
@@ -379,8 +383,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 4Y76Q8W243;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = StatusBarIP/Info.plist;
@@ -393,6 +400,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.hadesker.statusbarip;
 				PRODUCT_MODULE_NAME = StatusBarIP;
 				PRODUCT_NAME = "Status Bar IP";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 			};
