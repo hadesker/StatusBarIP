@@ -143,6 +143,7 @@ Adapter classification lives in `AdapterClassifier`:
 
 ## Links
 
+- App Store: https://apps.apple.com/us/app/status-bar-ip/id6768105320
 - GitHub: https://github.com/hadesker/StatusBarIP
 - Author: Hadesker
 - Website: https://hadesker.net
