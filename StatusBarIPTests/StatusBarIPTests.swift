@@ -45,6 +45,10 @@ final class StatusBarIPTests: XCTestCase {
             IPAddressDisplayFormatter.statusBarAddress("118.71.15.68", abbreviated: false),
             "118.71.15.68"
         )
+        XCTAssertEqual(
+            IPAddressDisplayFormatter.statusBarAddress("fe80::10a9:6e2:1256:3dd3", abbreviated: false),
+            "fe80...3dd3"
+        )
     }
 
     @MainActor
@@ -62,7 +66,8 @@ final class StatusBarIPTests: XCTestCase {
             localProvider: MockLocalProvider(entries: [
                 IPEntry(id: "lan-en0", kind: .lan, title: "LAN", subtitle: "en0 · IPv4", address: "192.168.1.20", interfaceName: "en0", metadata: nil)
             ]),
-            settingsStore: MockSettingsStore(settings: settings)
+            settingsStore: MockSettingsStore(settings: settings),
+            networkMonitor: MockNetworkMonitor()
         )
 
         store.refreshLocalEntries()
@@ -98,4 +103,13 @@ private final class MockSettingsStore: SettingsStoring {
     }
 
     func save(_ settings: AppSettings) {}
+}
+
+@MainActor
+private final class MockNetworkMonitor: NetworkMonitoring {
+    var onStatusChange: ((Bool) -> Void)?
+
+    func start() {}
+
+    func cancel() {}
 }

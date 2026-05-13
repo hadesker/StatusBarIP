@@ -9,6 +9,7 @@ final class IPStore: ObservableObject {
     @Published private(set) var publicResponse: PublicIPResponse?
     @Published private(set) var lastUpdated: Date?
     @Published private(set) var lastError: String?
+    @Published private(set) var isInternetAvailable = true
     @Published private(set) var launchAtLoginEnabled = false
     @Published private(set) var launchAtLoginError: String?
     @Published var copiedID: String?
@@ -24,18 +25,22 @@ final class IPStore: ObservableObject {
     private let publicFetcher: PublicIPFetching
     private let localProvider: LocalIPProviding
     private let settingsStore: SettingsStoring
+    private let networkMonitor: NetworkMonitoring
     private var timer: Timer?
     private var localEntries: [IPEntry] = []
 
     init(
         publicFetcher: PublicIPFetching = PublicIPService(),
         localProvider: LocalIPProviding = LocalIPService(),
-        settingsStore: SettingsStoring = UserDefaultsSettingsStore()
+        settingsStore: SettingsStoring = UserDefaultsSettingsStore(),
+        networkMonitor: NetworkMonitoring = NetworkMonitorService()
     ) {
         self.publicFetcher = publicFetcher
         self.localProvider = localProvider
         self.settingsStore = settingsStore
+        self.networkMonitor = networkMonitor
         self.settings = settingsStore.load()
+        configureNetworkMonitor()
         applyDockPolicy()
         refreshLaunchAtLoginStatus()
         refreshLocalEntries()
@@ -55,6 +60,7 @@ final class IPStore: ObservableObject {
     }
 
     func start() {
+        networkMonitor.start()
         Task { await refreshPublicIP() }
     }
 
@@ -69,6 +75,13 @@ final class IPStore: ObservableObject {
     }
 
     func refreshPublicIP() async {
+        guard isInternetAvailable else {
+            publicResponse = nil
+            lastError = "No internet"
+            rebuildEntries()
+            return
+        }
+
         do {
             let response = try await publicFetcher.fetch()
             publicResponse = response
@@ -146,6 +159,22 @@ final class IPStore: ObservableObject {
         }
 
         refreshLaunchAtLoginStatus()
+    }
+
+    private func configureNetworkMonitor() {
+        networkMonitor.onStatusChange = { [weak self] isConnected in
+            guard let self else { return }
+            isInternetAvailable = isConnected
+
+            if isConnected {
+                lastError = nil
+                refreshAll()
+            } else {
+                publicResponse = nil
+                lastError = "No internet"
+                refreshLocalEntries()
+            }
+        }
     }
 
     private func rebuildEntries() {

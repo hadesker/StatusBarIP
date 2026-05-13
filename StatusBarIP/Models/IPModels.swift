@@ -81,14 +81,21 @@ struct IPEntry: Identifiable, Codable, Equatable, Sendable {
 
 enum IPAddressDisplayFormatter {
     static func statusBarAddress(_ address: String, abbreviated: Bool) -> String {
-        guard abbreviated else { return address }
-
-        if let lastIPv4Part = address.split(separator: ".").last, address.contains(".") {
+        if abbreviated, let lastIPv4Part = address.split(separator: ".").last, address.contains(".") {
             return "\(address.prefix(3))...\(lastIPv4Part)"
         }
 
-        guard address.count > 6 else { return address }
-        return "\(address.prefix(3))...\(address.suffix(3))"
+        if abbreviated {
+            guard address.count > 6 else { return address }
+            return "\(address.prefix(3))...\(address.suffix(3))"
+        }
+
+        if address.contains(":") {
+            guard address.count > 8 else { return address }
+            return "\(address.prefix(4))...\(address.suffix(4))"
+        }
+
+        return address
     }
 }
 

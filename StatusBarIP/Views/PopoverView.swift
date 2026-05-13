@@ -82,10 +82,10 @@ struct PopoverView: View {
 
     private var footer: some View {
         HStack(spacing: 6) {
-            Image(systemName: store.lastError == nil ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
-                .foregroundStyle(store.lastError == nil ? .green : .orange)
+            Image(systemName: footerIconName)
+                .foregroundStyle(footerIconColor)
 
-            Text(store.lastError ?? lastUpdatedText)
+            Text(footerText)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .lineLimit(1)
@@ -101,10 +101,38 @@ struct PopoverView: View {
     }
 
     private var statusText: String {
+        if !store.isInternetAvailable {
+            return "No internet"
+        }
+
         if let entry = store.statusEntry {
             return "Showing \(entry.displayTitle)"
         }
         return "No visible IPs"
+    }
+
+    private var footerText: String {
+        if !store.isInternetAvailable {
+            return "No internet"
+        }
+
+        return store.lastError ?? lastUpdatedText
+    }
+
+    private var footerIconName: String {
+        if !store.isInternetAvailable {
+            return "wifi.slash"
+        }
+
+        return store.lastError == nil ? "checkmark.circle.fill" : "exclamationmark.triangle.fill"
+    }
+
+    private var footerIconColor: Color {
+        if !store.isInternetAvailable {
+            return .orange
+        }
+
+        return store.lastError == nil ? .green : .orange
     }
 
     private var lastUpdatedText: String {

@@ -107,6 +107,18 @@ final class StatusItemController: NSObject {
     private func updateStatusButton() {
         guard let button = statusItem.button else { return }
 
+        if !store.isInternetAvailable {
+            let image = store.settings.showStatusBarIcon
+                ? NSImage(systemSymbolName: "wifi.slash", accessibilityDescription: nil)
+                : nil
+            image?.isTemplate = true
+
+            button.image = image
+            button.title = store.settings.showStatusBarIcon ? " No internet" : "No internet"
+            button.toolTip = "No internet"
+            return
+        }
+
         let entry = store.statusEntry
         let image = store.settings.showStatusBarIcon
             ? NSImage(systemSymbolName: entry?.kind.symbolName ?? "network", accessibilityDescription: nil)

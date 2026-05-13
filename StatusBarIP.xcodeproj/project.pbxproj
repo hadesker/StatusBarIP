@@ -18,6 +18,7 @@
 		100000000000000000000109 /* Views/SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000209 /* Views/SettingsView.swift */; };
 		100000000000000000000110 /* StatusBarIPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000210 /* StatusBarIPTests.swift */; };
 		100000000000000000000111 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000212 /* Assets.xcassets */; };
+		100000000000000000000112 /* Services/NetworkMonitorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000214 /* Services/NetworkMonitorService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		100000000000000000000211 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		100000000000000000000212 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		100000000000000000000213 /* StatusBarIP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StatusBarIP.entitlements; sourceTree = "<group>"; };
+		100000000000000000000214 /* Services/NetworkMonitorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/NetworkMonitorService.swift; sourceTree = "<group>"; };
 		100000000000000000000501 /* Status Bar IP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Status Bar IP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		100000000000000000000502 /* StatusBarIPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatusBarIPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -83,6 +85,7 @@
 				100000000000000000000203 /* Models/IPModels.swift */,
 				100000000000000000000204 /* Services/PublicIPService.swift */,
 				100000000000000000000205 /* Services/LocalIPService.swift */,
+				100000000000000000000214 /* Services/NetworkMonitorService.swift */,
 				100000000000000000000206 /* Services/AppSettings.swift */,
 				100000000000000000000207 /* Services/IPStore.swift */,
 				100000000000000000000208 /* Views/PopoverView.swift */,
@@ -221,6 +224,7 @@
 				100000000000000000000104 /* Services/PublicIPService.swift in Sources */,
 				100000000000000000000105 /* Services/LocalIPService.swift in Sources */,
 				100000000000000000000106 /* Services/AppSettings.swift in Sources */,
+				100000000000000000000112 /* Services/NetworkMonitorService.swift in Sources */,
 				100000000000000000000107 /* Services/IPStore.swift in Sources */,
 				100000000000000000000108 /* Views/PopoverView.swift in Sources */,
 				100000000000000000000109 /* Views/SettingsView.swift in Sources */,
