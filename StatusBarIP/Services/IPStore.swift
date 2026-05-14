@@ -27,6 +27,7 @@ final class IPStore: ObservableObject {
     private let settingsStore: SettingsStoring
     private let networkMonitor: NetworkMonitoring
     private var timer: Timer?
+    private var reconnectRetryTask: Task<Void, Never>?
     private var localEntries: [IPEntry] = []
 
     init(
@@ -169,10 +170,32 @@ final class IPStore: ObservableObject {
             if isConnected {
                 lastError = nil
                 refreshAll()
+                scheduleReconnectRetries()
             } else {
+                reconnectRetryTask?.cancel()
                 publicResponse = nil
                 lastError = "No internet"
                 refreshLocalEntries()
+            }
+        }
+    }
+
+    private func scheduleReconnectRetries() {
+        reconnectRetryTask?.cancel()
+        reconnectRetryTask = Task { [weak self] in
+            for delay in [1.5, 4.0, 8.0, 15.0] {
+                try? await Task.sleep(for: .seconds(delay))
+                guard !Task.isCancelled else { return }
+
+                await MainActor.run {
+                    self?.refreshLocalEntries()
+                }
+
+                guard let self else { return }
+                guard isInternetAvailable else { return }
+                guard publicResponse == nil || lastError != nil else { return }
+
+                await refreshPublicIP()
             }
         }
     }
