@@ -182,9 +182,10 @@ final class SettingsWindowController {
             let hostingController = NSHostingController(rootView: SettingsView(store: store))
             let newWindow = NSWindow(contentViewController: hostingController)
             newWindow.title = "Status Bar IP Settings"
-            newWindow.styleMask = [.titled, .closable, .miniaturizable, .resizable]
+            newWindow.styleMask = [.titled, .closable, .miniaturizable]
             newWindow.setContentSize(NSSize(width: 820, height: 500))
             newWindow.contentMinSize = NSSize(width: 760, height: 440)
+            newWindow.standardWindowButton(.zoomButton)?.isEnabled = false
             newWindow.isReleasedWhenClosed = false
             newWindow.center()
             window = newWindow

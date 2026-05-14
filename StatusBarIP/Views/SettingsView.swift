@@ -94,8 +94,43 @@ private enum SettingsMenuItem: String, CaseIterable, Identifiable {
 }
 
 private enum SettingsPalette {
-    static let windowBackground = Color(red: 0.095, green: 0.082, blue: 0.115)
-    static let selectedMenuBackground = Color(red: 0.015, green: 0.315, blue: 0.78)
+    static let windowBackground = Color(nsColor: NSColor(name: nil) { appearance in
+        if appearance.isDarkMode {
+            return NSColor(calibratedRed: 0.08, green: 0.072, blue: 0.095, alpha: 1)
+        }
+
+        return NSColor.windowBackgroundColor
+    })
+
+    static let selectedMenuBackground = Color(nsColor: NSColor(name: nil) { appearance in
+        if appearance.isDarkMode {
+            return NSColor(calibratedRed: 0.0, green: 0.28, blue: 0.68, alpha: 1)
+        }
+
+        return NSColor(calibratedRed: 0.0, green: 0.36, blue: 0.78, alpha: 1)
+    })
+
+    static let rowBackground = Color(nsColor: NSColor(name: nil) { appearance in
+        if appearance.isDarkMode {
+            return NSColor(calibratedRed: 0.13, green: 0.115, blue: 0.15, alpha: 1)
+        }
+
+        return NSColor(calibratedWhite: 0.965, alpha: 1)
+    })
+
+    static let iconShadow = Color(nsColor: NSColor(name: nil) { appearance in
+        if appearance.isDarkMode {
+            return NSColor.black.withAlphaComponent(0.22)
+        }
+
+        return NSColor.shadowColor.withAlphaComponent(0.16)
+    })
+}
+
+private extension NSAppearance {
+    var isDarkMode: Bool {
+        bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+    }
 }
 
 private struct GeneralSettingsPane: View {
@@ -257,7 +292,7 @@ private struct AdapterDisplayPane: View {
         }
         .background {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .fill(Color.primary.opacity(0.035))
+                .fill(SettingsPalette.rowBackground)
         }
     }
 }
@@ -271,7 +306,7 @@ private struct AboutSettingsPane: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 96, height: 96)
-                .shadow(color: .black.opacity(0.18), radius: 16, y: 8)
+                .shadow(color: SettingsPalette.iconShadow, radius: 16, y: 8)
 
             VStack(spacing: 4) {
                 Text("Status Bar IP")
@@ -304,7 +339,7 @@ private struct AboutSettingsPane: View {
             .frame(width: 340)
             .background {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .fill(Color.primary.opacity(0.035))
+                    .fill(SettingsPalette.rowBackground)
             }
 
             Spacer()
@@ -428,7 +463,7 @@ private extension View {
             .padding(.vertical, 8)
             .background {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .fill(Color.primary.opacity(0.035))
+                    .fill(SettingsPalette.rowBackground)
             }
     }
 }
