@@ -83,6 +83,137 @@ The debug app bundle is created at:
 DerivedData/Build/Products/Debug/Status Bar IP.app
 ```
 
+## Binary Release
+
+The release script builds a universal macOS app, signs the app with a Developer ID certificate, notarizes it with Apple, staples the notarization ticket, signs the DMG, notarizes the DMG, and writes checksums.
+
+### 1. Install the Developer ID certificate
+
+In Xcode:
+
+```text
+Xcode > Settings > Accounts > Apple ID > Team > Manage Certificates...
+```
+
+Create or download:
+
+```text
+Developer ID Application
+```
+
+Then verify Terminal can see the signing identity:
+
+```sh
+security find-identity -v -p codesigning
+```
+
+You should see a line like:
+
+```text
+Developer ID Application: Hien Nguyen (4Y76Q8W243)
+```
+
+The script defaults to `SIGNING_IDENTITY=auto`, which selects the first `Developer ID Application` identity and uses its SHA-1 fingerprint. This avoids ambiguity when the same certificate name exists in both the login and system keychains.
+
+### 2. Configure notarization
+
+Create an app-specific password at:
+
+```text
+https://account.apple.com/account/manage
+```
+
+Copy [.env.example](.env.example) to `.env` and fill in your local values:
+
+```sh
+cp .env.example .env
+```
+
+Example `.env`:
+
+```sh
+APP_SPECIFIC_PASSWORD=<get https://account.apple.com/account/manage>
+APPLE_ID=<your apple id email address>
+NOTARY_PROFILE=<your notary profile name>
+REQUIRE_NOTARIZATION=1
+```
+
+`APPPLE_ID` is also accepted for compatibility if you already used that spelling. `.env` is ignored by git; do not commit app-specific passwords, `.p12`, `.p8`, or provisioning profiles.
+
+When `APP_SPECIFIC_PASSWORD`, `APPLE_ID` or `APPPLE_ID`, and `NOTARY_PROFILE` are present, the script runs:
+
+```sh
+xcrun notarytool store-credentials "$NOTARY_PROFILE" \
+  --apple-id "$APPLE_ID" \
+  --team-id "$DEVELOPMENT_TEAM" \
+  --password "$APP_SPECIFIC_PASSWORD" \
+  --validate
+```
+
+This stores the notary credentials securely in Keychain. After the profile is saved, you can remove `APP_SPECIFIC_PASSWORD` from `.env` if you prefer; future builds can use only `NOTARY_PROFILE`.
+
+### 3. Build the release
+
+From the repository root:
+
+```sh
+./scripts/build-release.sh
+```
+
+The script builds the `Release` app bundle and creates:
+
+```text
+releases/StatusBarIP-<version>-<build>-macOS.zip
+releases/StatusBarIP-<version>-<build>-macOS.dmg
+releases/StatusBarIP-<version>-<build>-macOS-SHA256SUMS.txt
+```
+
+For one-off builds without `.env`, pass values inline:
+
+```sh
+APPLE_ID="you@example.com" \
+APP_SPECIFIC_PASSWORD="app-specific-password" \
+NOTARY_PROFILE="statusbarip-notary" \
+REQUIRE_NOTARIZATION=1 \
+./scripts/build-release.sh
+```
+
+If `NOTARY_PROFILE` is omitted, the script can still create local ad-hoc-signed artifacts, but macOS Gatekeeper will warn users after download.
+
+### 4. Verify the release
+
+Verify the app bundle:
+
+```sh
+spctl --assess --type execute -vv \
+  "build/release/DerivedData/Build/Products/Release/Status Bar IP.app"
+```
+
+Expected result:
+
+```text
+accepted
+source=Notarized Developer ID
+origin=Developer ID Application: Hien Nguyen (4Y76Q8W243)
+```
+
+Verify the DMG:
+
+```sh
+spctl --assess --type open --context context:primary-signature -vv \
+  "releases/StatusBarIP-<version>-<build>-macOS.dmg"
+```
+
+Expected result:
+
+```text
+accepted
+source=Notarized Developer ID
+origin=Developer ID Application: Hien Nguyen (4Y76Q8W243)
+```
+
+Upload the generated `.dmg`, `.zip`, and checksum file to the GitHub release.
+
 ## Test
 
 ```sh

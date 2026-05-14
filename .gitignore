@@ -20,6 +20,16 @@ build/
 # Archives and reports
 *.xcarchive
 *.xcresult
+releases/
+
+# Signing and local credentials
+*.p12
+*.p8
+*.mobileprovision
+*.provisionprofile
+.env
+.env.*
+!.env.example
 
 # Temporary files
 *.tmp
